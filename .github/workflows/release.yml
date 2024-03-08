@@ -53,6 +53,11 @@ jobs:
       - name: Install OpenSSL on Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config libudev-dev
+      - name: Set environment variables for OpenSSL on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          echo "OPENSSL_DIR=/usr/include/openssl" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=/usr/lib/pkgconfig" >> $GITHUB_ENV
       
       - name: Install OpenSSL on macOS
         if: matrix.os == 'macos-latest'
