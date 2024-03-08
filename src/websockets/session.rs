@@ -74,7 +74,7 @@ impl WebsocketClientSession {
             let mut consumer = consumer;
             while let Some(delivery) = consumer.next().await {
                 match delivery {
-                    Ok((_channel, delivery)) => {
+                    Ok((delivery)) => {
                         let msg = delivery.data.clone(); // Clone the data for further use
                         if let Ok(text) = String::from_utf8(msg) {
                             let mut ws_guard = ws_clone.lock().await;

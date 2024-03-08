@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 tokio-tungstenite = "0.16.1"
-lapin = "1.9.0"
+lapin = { version = "2.3.1", features = ["rustls"] }
 futures-util = "0.3"
 uuid = { version = "1", features = ["v4"] }
 log = "0.4"
