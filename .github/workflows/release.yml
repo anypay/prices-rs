@@ -60,8 +60,14 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
         with:
           targets: ${{ matrix.target }}
-      - name: Install OpenSSL
+      - name: Install OpenSSL on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config
+      
+      - name: Install OpenSSL on macOS
+        if: matrix.os == 'macos-latest'
+        run: brew install openssl
+      
         # If using cross, install it after OpenSSL to ensure the environment is ready
       - run: cargo install cross --git https://github.com/cross-rs/cross
       - run: ${{ matrix.command }} build --release --target ${{ matrix.target }}
