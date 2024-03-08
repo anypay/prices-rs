@@ -22,21 +22,11 @@ jobs:
         # https://github.com/cross-rs/cross#supported-targets
         # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
         include:
-          # 32-bit (i686)
-          # i686-apple-darwin is Tier 3.
-          # - build: linux-32-bit
-          #   os: ubuntu-latest
-          #   target: i686-unknown-linux-gnu
-          #   command: cross
-          # - build: windows-32-bit
-          #   os: ubuntu-latest
-          #   target: i686-pc-windows-gnu
-          #   command: cross
-          # # 64-bit (x86)
-          # - build: linux-64-bit
-          #   os: ubuntu-latest
-          #   target: x86_64-unknown-linux-gnu
-          #   command: cross
+          # 64-bit (x86)
+          - build: linux-64-bit
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            command: cross
           - build: macos-64-bit
             os: macos-latest
             target: x86_64-apple-darwin
