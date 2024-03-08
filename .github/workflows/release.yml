@@ -60,6 +60,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
         with:
           targets: ${{ matrix.target }}
+      - name: Install OpenSSL
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config
+        # If using cross, install it after OpenSSL to ensure the environment is ready
       - run: cargo install cross --git https://github.com/cross-rs/cross
       - run: ${{ matrix.command }} build --release --target ${{ matrix.target }}
       # 7z is available on all runners.
