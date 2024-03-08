@@ -28,10 +28,10 @@ jobs:
           #   os: ubuntu-latest
           #   target: i686-unknown-linux-gnu
           #   command: cross
-          - build: windows-32-bit
-            os: ubuntu-latest
-            target: i686-pc-windows-gnu
-            command: cross
+          # - build: windows-32-bit
+          #   os: ubuntu-latest
+          #   target: i686-pc-windows-gnu
+          #   command: cross
           # # 64-bit (x86)
           # - build: linux-64-bit
           #   os: ubuntu-latest
@@ -41,10 +41,10 @@ jobs:
             os: macos-latest
             target: x86_64-apple-darwin
             command: cargo
-          - build: windows-64-bit
-            os: ubuntu-latest
-            target: x86_64-pc-windows-gnu
-            command: cross
+          # - build: windows-64-bit
+          #   os: ubuntu-latest
+          #   target: x86_64-pc-windows-gnu
+          #   command: cross
           # 64-bit (ARM)
           # aarch64-pc-windows-gnullvm is Tier 3.
           - build: macos-arm
