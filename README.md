@@ -8,3 +8,4 @@
 - PRICES_WEBSOCKETS_PORT - 5210
 - AMQP_URL               - amqp://localhost:5672/
 - RUST_LOG               - none (info, debug, trace)
+- CMC_PRO_API_KEY

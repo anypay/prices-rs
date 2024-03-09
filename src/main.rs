@@ -1,16 +1,17 @@
 mod websockets;
 
-use std::{env, net::SocketAddr};
+use std::{env, net::SocketAddr, sync::Arc};
 
 use lapin::{
     Channel, Connection, ConnectionProperties
 };
+use serde_json::json;
 use tokio::net::TcpListener;
 use tokio_tungstenite::{accept_async, WebSocketStream};
 use futures_util::{StreamExt, SinkExt};
 use dotenv::dotenv;
 use crate::websockets::session::WebsocketClientSession; // Adjust path according to your module structure
-
+use prices::sources::coinmarketcap; // Import the sources module
 
 #[tokio::main]
 async fn main() {
@@ -38,10 +39,19 @@ async fn main() {
     .await
     .expect("Failed to connect to RabbitMQ");
 
+    match coinmarketcap::get_price("BTC".to_string()).await {
+        Ok(price) => {
+            log::info!("price.updated currency=BTC base_currency=USD value={:?}", price);
+        },
+        Err(e) => println!("Error: {}", e),
+    }
+
     while let Ok((stream, _)) = listener.accept().await {
         let channel = rabbit_connection.create_channel().await.expect("Failed to create channel");
         tokio::spawn(handle_connection(stream, channel));
     }
+
+
 }
 
 async fn handle_connection(stream: tokio::net::TcpStream, channel: Channel) {
