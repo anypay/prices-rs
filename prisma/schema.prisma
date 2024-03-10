@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    // Corresponds to the cargo alias created earlier
+    provider      = "cargo prisma"
+    // The location to generate the client. Is relative to the position of the schema
+    output        = "../src/prisma.rs"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PriceRecords {
+  id            Int      @id @default(autoincrement())
+  currency      String   @db.VarChar(255)
+  value         Decimal  @db.Decimal
+  base_currency String   @db.VarChar(255)
+  source        String   @db.VarChar(255)
+  createdAt     DateTime @db.Timestamptz(6)
+  updatedAt     DateTime @db.Timestamptz(6)
+}
+
+model prices {
+  id            Int      @id @default(autoincrement())
+  currency      String   @db.VarChar(255)
+  value         Decimal  @db.Decimal
+  base_currency String  @default("BTC") @db.VarChar(255)
+  createdAt     DateTime @db.Timestamptz(6)
+  updatedAt     DateTime @db.Timestamptz(6)
+  source        String  @db.VarChar(255)
+}

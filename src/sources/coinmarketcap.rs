@@ -105,4 +105,5 @@ pub async fn get_price(currency: String) -> Result<f64, Box<dyn std::error::Erro
     let value = currency_data.quote.get("USD").ok_or("USD quote not found")?.price;
 
     Ok(value)
+
 }
